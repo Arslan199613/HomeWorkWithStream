@@ -19,7 +19,10 @@ public class Main {
         students.add(student4);
         students.add(student5);
 
-        // Задача 1. Найти минимальное и максимальное значение. Положить с BiConsumer
+        // Задача 1. Найти минимальное и максимальное значение.
+        // Создал список студентов,вывел самого молодого и самого взрослого.
+        // Положил в BiConsumer.
+
         Optional<String> min = students.stream()
                 .min(Comparator.comparing(Student::getAge))
                 .map(e -> e.getName());
@@ -30,8 +33,7 @@ public class Main {
                 .map(e -> e.getName());
         max.ifPresent(System.out::println);//самый взрослый студент
 
-        BiConsumer<Optional<String>, Optional<String>> minMaxConsumer = (a, b) -> System.out.println("Самый молодой студент- "
-                + a + ", самый взрослый студент- " + b);
+        BiConsumer<Optional<String>, Optional<String>> minMaxConsumer = (a, b) -> System.out.println("Самый молодой студент- " + a + ", самый взрослый студент- " + b);
 
         if (minMaxConsumer == null) {
             minMaxConsumer.accept(null, null);
@@ -39,7 +41,7 @@ public class Main {
             minMaxConsumer.accept(min, max);
         }
 
-        //Задача 2. Вывод четных чисел
+        //Задача 2. Вывел четные числа исвользуя стримы
 
         List<Integer> integerList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         integerList.stream()
