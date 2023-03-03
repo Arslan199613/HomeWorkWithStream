@@ -18,11 +18,13 @@ public class Main {
         students.add(student4);
         students.add(student5);
 
+        findMinMax(students);
 
+    }
         // Задача 1. Найти минимальное и максимальное значение.
         // Создал список студентов,вывел самого молодого и самого взрослого.
         // Положил в BiConsumer.
-
+    public static void findMinMax(List<Student>students) {
         String min = students.stream()
                 .min(Comparator.comparing(Student::getAge))
                 .map(e -> e.getName()).get();
