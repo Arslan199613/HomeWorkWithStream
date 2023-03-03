@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,21 +18,22 @@ public class Main {
         students.add(student4);
         students.add(student5);
 
+
         // Задача 1. Найти минимальное и максимальное значение.
         // Создал список студентов,вывел самого молодого и самого взрослого.
         // Положил в BiConsumer.
 
-        Optional<String> min = students.stream()
+        String min = students.stream()
                 .min(Comparator.comparing(Student::getAge))
-                .map(e -> e.getName());
-        min.ifPresent(System.out::println);//самый молодой студент
+                .map(e -> e.getName()).get();
+        System.out.println(min);//самый молодой студент
 
-        Optional<String> max = students.stream()
+        String max = students.stream()
                 .max(Comparator.comparing(Student::getAge))
-                .map(e -> e.getName());
-        max.ifPresent(System.out::println);//самый взрослый студент
+                .map(e -> e.getName()).get();
+        System.out.println(max);
 
-        BiConsumer<Optional<String>, Optional<String>> minMaxConsumer = (a, b) -> System.out.println("Самый молодой студент- " + a + ", самый взрослый студент- " + b);
+        BiConsumer<String,String> minMaxConsumer = (a, b) -> System.out.println("Самый молодой студент- " + a + ", самый взрослый студент- " + b);
 
         if (minMaxConsumer == null) {
             minMaxConsumer.accept(null, null);
@@ -44,9 +44,12 @@ public class Main {
         //Задача 2. Вывел четные числа исвользуя стримы
 
         List<Integer> integerList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        integerList.stream()
-                .filter(i -> i % 2 == 0)
-                .forEach(System.out::println);
+
+        long count = integerList.stream()
+                .filter(e -> e % 2 == 0)
+                .count();
+        System.out.println(count);
+
 
     }
 }
